@@ -92,5 +92,5 @@ class GameBot:
 
 
 if __name__ == "__main__":
-    bot = GameBot(name="±ﬁzzTangizzZ", visible=True, shots_per_target=30)
+    bot = GameBot(name="TangizzZ", visible=True, shots_per_target=30)
     bot.start()
