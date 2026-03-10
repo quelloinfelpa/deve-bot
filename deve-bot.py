@@ -491,10 +491,10 @@ if __name__ == "__main__":
     bot = GameBotTurbo(
         name="sergio_turbo",
         visible=True,
-        shots_per_burst=100,
-        max_workers=20,
+        shots_per_burst=300,
+        max_workers=100,
         fire_delay=0.0001,        # ~1000 colpi/sec per thread
-        recheck_after_shots=50,  # ricalibra il target ogni 15 colpi
+        recheck_after_shots=5,  # ricalibra il target ogni 50 colpi
         session_path="bot_session.json",
     )
     bot.start()
