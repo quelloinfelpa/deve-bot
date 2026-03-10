@@ -64,7 +64,7 @@ class GameBot:
     def fire_volley(self, target: str):
         for _ in range(self.shots_per_target):
             self.fire_at(target)
-        print(f"Sbrogna {target}")
+        print(f"S {target}")
     
     def fire_loop(self):
         while self._running:
@@ -92,5 +92,5 @@ class GameBot:
 
 
 if __name__ == "__main__":
-    bot = GameBot(name="ZzzTangizzZ", visible=True, shots_per_target=30)
+    bot = GameBot(name="±ﬁzzTangizzZ", visible=True, shots_per_target=30)
     bot.start()
