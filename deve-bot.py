@@ -6,7 +6,7 @@ class GameBot:
     
     BASE_URL = "https://sososisi.isonlab.net"
     
-    def __init__(self, name: str, visible: bool = True, shots_per_target: int = 30):
+    def __init__(self, name: str, visible: bool = True, shots_per_target: int = 10):
         self.name = name
         self.visible = visible
         self.shots_per_target = shots_per_target
@@ -64,7 +64,7 @@ class GameBot:
     def fire_volley(self, target: str):
         for _ in range(self.shots_per_target):
             self.fire_at(target)
-        print(f"S {target}")
+        print(f"💀 Distrutto {target}")
     
     def fire_loop(self):
         while self._running:
@@ -92,5 +92,5 @@ class GameBot:
 
 
 if __name__ == "__main__":
-    bot = GameBot(name="TangizzZ", visible=True, shots_per_target=30)
+    bot = GameBot(name="sergio_2", visible=True, shots_per_target=10)
     bot.start()
