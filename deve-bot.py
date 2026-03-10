@@ -10,7 +10,20 @@ class DeveBot():
         self.code = self.auth(self.name)
         self.visible = False
 
-    #GET /api/auth?name=Mario
+    def shoot(self):
+        players = self.get_players()
+        if len(players) > 0:
+            if not self.visible:
+                self.change_visibilty()
+            target = players[0]['name']
+            url = BASE_URL + '/api/fire?code=' + self.code + '&target=' + target
+            res = requests.get(url)
+            if self.visible:
+                self.change_visibilty() #diventa invisibile
+            return res.json()
+        else:
+            print('No players to shoot at')
+            return None
     def auth(self, name):
         url = BASE_URL + '/api/auth?name=' + name
         res = requests.get(url)
@@ -27,7 +40,43 @@ class DeveBot():
         res = requests.get(url)
         return res.json()
     
+    def get_players(self):
+        url = BASE_URL + '/api/players?code=' + self.code
+        res = requests.get(url)
+        return res.json()
     
 
+if __name__ == "__main__":
+    bot = DeveBot()
+    bot.game()
 
-DeveBot()
+#shoot: prende lista utenti visibili, si setta visibile, spara al primo, si setta invisibile
+'''
+#per autenticarsi, restituisce un codice da usare per il ping
+GET /api/auth?name=Mario
+{
+  "ok": true,
+  "name": "Mario",
+  "code": "AB12CD34",
+  "pingEverySeconds": 5
+}
+
+#ogni 5 secondi da fare altrimenti si muore (thread che lo fa in automatico)
+GET /api/ping?code=AB12CD34
+#per diventare visibili
+GET /api/ping?code=AB12CD34&visible=visible
+#per diventare invisibili
+GET /api/ping?code=AB12CD34&visible=invisible
+{
+  "ok": true,
+  "name": "Mario",
+  "visible": true,
+  "nextPingAt": "2026-03-09T22:00:05.000Z"
+}
+
+#lista bot autenticati
+GET /api/players?code=AB12CD34
+
+#spara
+GET /api/fire?code=AB12CD34&target=Luisa
+'''
